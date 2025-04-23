@@ -1,0 +1,31 @@
+ALTER TABLE cliente MODIFY COLUMN telefone VARCHAR(50);
+
+ALTER TABLE cliente ADD COLUMN CPF VARCHAR(14);
+
+ALTER TABLE cliente DROP COLUMN CPF;
+
+-- 3. Renomear uma coluna
+ALTER TABLE clientes CHANGE COLUMN nome nome_completo VARCHAR(150);
+
+-- 4. Remover uma coluna
+ALTER TABLE clientes DROP COLUMN data_cadastro;
+
+-- 5. Adicionar uma chave estrangeira
+ALTER TABLE ordens_servico 
+ADD CONSTRAINT fk_cliente 
+FOREIGN KEY (cliente_id) REFERENCES clientes(id);
+
+-- 6. Remover uma chave estrangeira
+ALTER TABLE ordens_servico DROP FOREIGN KEY fk_cliente;
+
+-- 7. Renomear uma tabela
+RENAME TABLE clientes TO tb_clientes;
+
+-- 8. Adicionar uma coluna com valor padrão
+ALTER TABLE ordens_servico ADD COLUMN status VARCHAR(20) DEFAULT 'pendente';
+
+-- 9. Criar um índice
+CREATE INDEX idx_email ON tb_clientes(email);
+
+-- 10. Excluir um índice
+DROP INDEX idx_email ON tb_clientes;
