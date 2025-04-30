@@ -1,0 +1,13 @@
+DROP VIEW IF EXISTS cliente;
+
+DROP PROCEDURE IF EXISTS livro;
+
+DROP FUNCTION IF EXISTS departamento;
+
+DROP TABLE IF EXISTS autor, exemplar, funcionario, pedido, venda;
+
+SET foreign_key_checks = 0;
+DROP TABLE IF EXISTS livro, exemplar, livroautor, livropalavrachave;
+
+
+DROP TABLE IF EXISTS funcionario;
