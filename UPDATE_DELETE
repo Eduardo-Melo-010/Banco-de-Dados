@@ -1,0 +1,31 @@
+update funcionario set Cargo = 'Editora-Adjunta' where FuncionarioID = '1';
+        
+update funcionario set Telefone = '2199999-0033' where  FuncionarioID = '3';
+
+update venda set Valor_Total = 300 where VendaID = '1';
+
+update venda set Valor_Total = Valor_Total * 1.5 where VendaID = '3';
+
+update venda set Valor_Total = Valor_Total * 0.5 where VendaID <= 200;
+
+update pedido set Data_Pedido = '2025-04-06' where PedidoID = '6';
+
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE pedido SET Status = UPPER (Status);
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE pedido SET Data_Pedido = NOW() WHERE PedidoID = 5;
+
+DELETE FROM livro WHERE ISBN = '9788501000010';
+
+delete from funcionario where FuncionarioID = '5';
+
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM livro WHERE Genero = 'Romance';
+
+DELETE FROM pedido WHERE Data_Pedido < '2023-01-01';
+
+DELETE FROM pedido WHERE status = 'CANCELADO';
+
+DELETE FROM livro WHERE AutorID = '1';
