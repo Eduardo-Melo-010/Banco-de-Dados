@@ -1,11 +1,10 @@
-CREATE DATABASE editora
+CREATE DATABASE editora;
 
-USE editora
-
+USE editora;
 CREATE TABLE IF NOT EXISTS `editora`.`areaconhecimento` (
   `AreaID` INT NOT NULL AUTO_INCREMENT,
   `Descricao` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`AreaID`))
+  PRIMARY KEY (`AreaID`));
 
 CREATE TABLE IF NOT EXISTS `editora`.`autor` (
   `AutorID` INT NOT NULL AUTO_INCREMENT,
@@ -13,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `editora`.`autor` (
   `Biografia` TEXT NULL DEFAULT NULL,
   `Nacionalidade` VARCHAR(100) NULL DEFAULT NULL,
   `Data_Nascimento` DATE NULL DEFAULT NULL,
-  PRIMARY KEY (`AutorID`))
+  PRIMARY KEY (`AutorID`));
 
 CREATE TABLE IF NOT EXISTS `editora`.`cliente` (
   `ClienteID` INT NOT NULL AUTO_INCREMENT,
@@ -21,14 +20,14 @@ CREATE TABLE IF NOT EXISTS `editora`.`cliente` (
   `Email` VARCHAR(255) NULL DEFAULT NULL,
   `Telefone` VARCHAR(20) NULL DEFAULT NULL,
   `Endereco` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`ClienteID`))
+  PRIMARY KEY (`ClienteID`));
 
 CREATE TABLE IF NOT EXISTS `editora`.`departamento` (
   `DepartamentoID` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(100) NULL DEFAULT NULL,
   `Responsavel` VARCHAR(100) NULL DEFAULT NULL,
   `Descricao` TEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`DepartamentoID`))
+  PRIMARY KEY (`DepartamentoID`));
 
 CREATE TABLE IF NOT EXISTS `editora`.`livro` (
   `ISBN` VARCHAR(13) NOT NULL,
@@ -39,38 +38,40 @@ CREATE TABLE IF NOT EXISTS `editora`.`livro` (
   `Num_Paginas` INT NULL DEFAULT NULL,
   `Descricao` TEXT NULL DEFAULT NULL,
   `AutorID` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`ISBN`))
+  PRIMARY KEY (`ISBN`)
+  );
 
 CREATE TABLE IF NOT EXISTS `editora`.`exemplar` (
   `SerieID` VARCHAR(50) NOT NULL,
   `Estado` VARCHAR(50) NULL DEFAULT NULL,
   `Localizacao` VARCHAR(100) NULL DEFAULT NULL,
   `ISBN` VARCHAR(13) NULL DEFAULT NULL,
-  PRIMARY KEY (`SerieID`),
+  PRIMARY KEY (`SerieID`));
  
-CREATE TABLE IF NOT EXISTS `editora`.`funcionario` (
+ CREATE TABLE IF NOT EXISTS `editora`.`funcionario` (
   `FuncionarioID` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(255) NULL DEFAULT NULL,
   `Cargo` VARCHAR(100) NULL DEFAULT NULL,
   `Telefone` VARCHAR(20) NULL DEFAULT NULL,
   `Endereco` VARCHAR(255) NULL DEFAULT NULL,
   `DepartamentoID` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`FuncionarioID`),
+  `QtdeLivrosVendidos` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`FuncionarioID`));
  
 CREATE TABLE IF NOT EXISTS `editora`.`livroautor` (
   `ISBN` VARCHAR(13) NOT NULL,
   `AutorID` INT NOT NULL,
-  PRIMARY KEY (`ISBN`, `AutorID`),
+  PRIMARY KEY (`ISBN`, `AutorID`));
  
 CREATE TABLE IF NOT EXISTS `editora`.`livropalavrachave` (
   `ISBN` VARCHAR(13) NOT NULL,
   `PalavraID` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ISBN`, `PalavraID`),
+  PRIMARY KEY (`ISBN`, `PalavraID`));
   
 CREATE TABLE IF NOT EXISTS `editora`.`palavrachave` (
   `PalavraID` INT NOT NULL AUTO_INCREMENT,
   `Descricao` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`PalavraID`))
+  PRIMARY KEY (`PalavraID`));
 
 
 CREATE TABLE IF NOT EXISTS `editora`.`pedido` (
@@ -78,8 +79,7 @@ CREATE TABLE IF NOT EXISTS `editora`.`pedido` (
   `ClienteID` INT NULL DEFAULT NULL,
   `Data_Pedido` DATE NULL DEFAULT NULL,
   `Status` VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`PedidoID`),
-  INDEX `ClienteID` (`ClienteID` ASC) VISIBLE,
+  PRIMARY KEY (`PedidoID`));
   
   
 CREATE TABLE IF NOT EXISTS `editora`.`venda` (
@@ -87,4 +87,4 @@ CREATE TABLE IF NOT EXISTS `editora`.`venda` (
   `PedidoID` INT NULL DEFAULT NULL,
   `Data_Venda` DATE NULL DEFAULT NULL,
   `Valor_Total` DECIMAL(10,2) NULL DEFAULT NULL,
-  PRIMARY KEY (`VendaID`),
+  PRIMARY KEY (`VendaID`));
