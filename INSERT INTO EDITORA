@@ -1,0 +1,203 @@
+
+INSERT INTO autor (AutorID, Nome, Biografia, Nacionalidade, Data_Nascimento)
+VALUES
+(1, 'Clarice Lispector', 'Escritora ucraniana naturalizada brasileira, destacou-se por sua prosa introspectiva e inovadora que explora a condição humana e a identidade feminina.', 'Brasileira', '1920-12-10'),
+(2, 'George Orwell', 'Escritor britânico cujas obras distópicas "1984" e "A Revolução dos Bichos" se tornaram clássicos da literatura política mundial.', 'Britânico', '1903-06-25'),
+(3, 'Jorge Amado', 'Romancista brasileiro que retratou como poucos a cultura baiana, com obras traduzidas para mais de 40 idiomas.', 'Brasileiro', '1912-08-10'),
+(4, 'José Saramago', 'Único escritor de língua portuguesa laureado com o Nobel de Literatura, conhecido por seu estilo narrativo único.', 'Português', '1922-11-16'),
+(5, 'Gabriel García Márquez', 'Nobel de Literatura e principal expoente do realismo mágico, criou o imaginário povoado de Macondo.', 'Colombiano', '1927-03-06'),
+(6, 'Liev Tolstói', 'Gigante da literatura russa, autor de obras monumentais como "Guerra e Paz" e "Anna Karenina".', 'Russo', '1828-09-09'),
+(7, 'William Shakespeare', 'O mais influente dramaturgo da literatura ocidental, autor de peças fundamentais como "Hamlet" e "Romeu e Julieta".', 'Britânico', '1564-04-23'),
+(8, 'F. Scott Fitzgerald', 'Principal representante da Geração Perdida, capturou o esplendor e decadência do sonho americano nos anos 1920.', 'Americano', '1896-09-24'),
+(9, 'Charles Dickens', 'Romancista da era vitoriana, criou alguns dos personagens mais memoráveis da literatura inglesa como Oliver Twist.', 'Britânico', '1812-02-07'),
+(10, 'Jane Austen', 'Romancista que retratou com ironia e perspicácia a sociedade rural inglesa do início do século XIX.', 'Britânica', '1775-12-16'),
+(11, 'J.R.R. Tolkien', 'Filólogo e escritor britânico, criador de um dos mais elaborados universos de fantasia da literatura mundial.', 'Britânico', '1892-01-03'),
+(12, 'Mark Twain', 'Humorista e romancista americano, considerado o "pai" da literatura norte-americana por Ernest Hemingway.', 'Americano', '1835-11-30'),
+(13, 'Albert Camus', 'Filósofo e escritor franco-argelino, Nobel de Literatura, conhecido por suas obras sobre o absurdo da condição humana.', 'Franco-argelino', '1913-11-07'),
+(14, 'Paulo Coelho', 'Escritor brasileiro de grande sucesso internacional, conhecido por obras espiritualistas e de autoajuda literária.', 'Brasileiro', '1947-08-24'),
+(15, 'Agatha Christie', 'A "Rainha do Crime", autora de mais de 80 romances policiais que venderam bilhões de cópias em todo o mundo.', 'Britânica', '1890-09-15'),
+(16, 'Ernest Hemingway', 'Nobel de Literatura americano, conhecido por seu estilo literário minimalista e por suas aventuras pessoais.', 'Americano', '1899-07-21'),
+(17, 'Franz Kafka', 'Escritor tcheco de língua alemã, cuja obra explora temas de alienação, burocracia e a impotência do indivíduo.', 'Tcheco', '1883-07-03'),
+(18, 'Haruki Murakami', 'Escritor japonês contemporâneo de grande sucesso internacional com obras que misturam realismo e surrealismo.', 'Japonês', '1949-01-12'),
+(19, 'Machado de Assis', 'Fundador da Academia Brasileira de Letras e maior nome da literatura brasileira, autor de "Dom Casmurro" e "Memórias Póstumas".', 'Brasileiro', '1839-06-21'),
+(20, 'Victor Hugo', 'Poeta, dramaturgo e romancista francês, autor de clássicos como "Os Miseráveis" e "O Corcunda de Notre-Dame".', 'Francês', '1802-02-26');
+
+
+INSERT INTO livro (ISBN, Titulo, Editora, Data_Publicacao, Genero, Num_Paginas, Descricao, AutorID)
+VALUES
+('9788501000034', 'A Hora da Estrela', 'Editora Rocco', '1977-10-01', 'Romance', 87, 'História de Macabéa, nordestina pobre no Rio de Janeiro, escrita com lirismo.', 1),
+('9788501000041', 'Perto do Coração Selvagem', 'Editora Rocco', '1943-01-01', 'Romance', 196, 'Romance de estreia com estilo introspectivo e inovador.', 1),
+('9788501000058', 'Capitães da Areia', 'Editora Record', '1937-01-01', 'Romance', 256, 'Relato de crianças abandonadas vivendo nas ruas de Salvador.', 3),
+('9788501000065', 'Gabriela, Cravo e Canela', 'Editora Record', '1958-01-01', 'Romance', 368, 'Amor entre Gabriela e Nacib no contexto da modernização de Ilhéus.', 3),
+('9788501000072', 'Ensaio sobre a Cegueira', 'Editora Companhia das Letras', '1995-01-01', 'Ficção', 320, 'Cidade é tomada por uma epidemia de cegueira branca.', 4),
+('9788501000089', 'O Evangelho Segundo Jesus Cristo', 'Editora Companhia das Letras', '1991-01-01', 'Ficção', 376, 'Releitura humanizada da vida de Jesus.', 4),
+('9788501000096', 'Cem Anos de Solidão', 'Editora Record', '1967-01-01', 'Realismo Mágico', 448, 'Saga da família Buendía na aldeia de Macondo.', 5),
+('9788501000102', 'O Amor nos Tempos do Cólera', 'Editora Record', '1985-01-01', 'Romance', 368, 'História de amor adiada por mais de 50 anos.', 5),
+('9788501000133', 'Hamlet', 'Editora Martin Claret', '1600-01-01', 'Tragédia', 250, 'Peça sobre vingança, corrupção e loucura.', 7),
+('9788501000140', 'Romeu e Julieta', 'Editora Martin Claret', '1597-01-01', 'Romance', 400, 'Trágica história de amor entre jovens de famílias rivais.', 7),
+('9788501000157', 'O Grande Gatsby', 'Editora Companhia das Letras', '1925-04-10', 'Romance', 180, 'Jay Gatsby e seu amor por Daisy nos anos 20.', 8),
+('9788501000164', 'Os Belos e Malditos', 'Editora Companhia das Letras', '1922-03-04', 'Romance', 320, 'Decadência de um casal rico na era do jazz.', 8),
+('9788501000171', 'Oliver Twist', 'Editora Abril Cultural', '1837-09-01', 'Romance', 450, 'Órfão enfrenta as dificuldades da Londres vitoriana.', 9),
+('9788501000188', 'Grandes Esperanças', 'Editora HarperCollins', '1861-06-01', 'Romance', 544, 'Jornada de amadurecimento de Pip.', 9),
+('9788501000195', 'Orgulho e Preconceito', 'Editora Landmark', '1813-01-28', 'Romance', 432, 'Relação entre Elizabeth Bennet e Mr. Darcy.', 10),
+('9788501000201', 'Razão e Sensibilidade', 'Editora Landmark', '1811-10-30', 'Romance', 320, 'História das irmãs Dashwood em busca do amor.', 10),
+('9788501000218', '1984', 'Editora Companhia das Letras', '1949-06-08', 'Distopia', 328, 'Winston Smith luta contra regime totalitário.', 2),
+('9788501000225', 'A Revolução dos Bichos', 'Editora Companhia das Letras', '1945-08-17', 'Fábula', 144, 'Animais tomam o poder de uma fazenda.', 2),
+('9788501000232', 'Guerra e Paz', 'The Russian Messenger', '1869-01-01', 'Romance Histórico', 1225, 'Relato épico das guerras napoleônicas.', 6),
+('9788501000249', 'Anna Karenina', 'The Russian Messenger', '1878-01-01', 'Romance', 864, 'Tragédia de uma mulher aristocrata.', 6),
+('9788501000256', 'Norwegian Wood', 'Editora Alfaguara', '1987-09-04', 'Romance', 304, 'Juventude e perda emocional de Toru.', 18),
+('9788501000263', 'Kafka à Beira-Mar', 'Editora Alfaguara', '2002-07-01', 'Ficção', 416, 'Busca surreal por identidade e destino.', 18),
+('9788501000270', 'O Hobbit', 'Editora Martins Fontes', '1937-09-21', 'Fantasia', 320, 'Bilbo Bolseiro embarca em jornada por tesouro.', 11),
+('9788501000287', 'O Senhor dos Anéis - A Sociedade do Anel', 'Editora HarperCollins', '1954-07-29', 'Fantasia', 423, 'Frodo inicia a missão de destruir o Anel.', 11),
+('9788501000294', 'As Aventuras de Tom Sawyer', 'Editora Abril Cultural', '1876-12-01', 'Infantil', 250, 'Travessuras de Tom no sul dos EUA.', 12),
+('9788501000300', 'As Aventuras de Huckleberry Finn', 'Editora Abril Cultural', '1885-02-18', 'Aventura', 366, 'Viagem de Huck pelo rio Mississippi.', 12),
+('9788501000317', 'O Estrangeiro', 'Editora Record', '1942-05-01', 'Filosofia', 200, 'Existência indiferente de Meursault.', 13),
+('9788501000324', 'A Peste', 'Editora Record', '1947-06-01', 'Filosofia', 480, 'Cidade enfrenta epidemia e reflexão existencial.', 13),
+('9788501000331', 'O Alquimista', 'Editora Rocco', '1988-06-01', 'Ficção', 208, 'Jornada espiritual de um pastor em busca de tesouro.', 14),
+('9788501000348', 'Brida', 'Editora Rocco', '1990-04-01', 'Ficção', 320, 'Busca da jovem Brida por sabedoria e magia.', 14),
+('9788501000355', 'Assassinato no Expresso do Oriente', 'Editora Planeta', '1934-01-01', 'Mistério', 256, 'Poirot investiga assassinato em trem de luxo.', 15),
+('9788501000362', 'O Caso dos Dez Negrinhos', 'Editora Planeta', '1939-11-01', 'Mistério', 320, 'Convidados em ilha são mortos um a um.', 15),
+('9788501000379', 'O Velho e o Mar', 'Editora Nova Fronteira', '1952-09-01', 'Ficção', 128, 'Velho pescador luta contra marlim gigante.', 16),
+('9788501000386', 'Por Quem os Sinos Dobram', 'Editora Nova Fronteira', '1940-05-21', 'Romance', 480, 'Americano combate na Guerra Civil Espanhola.', 16),
+('9788501000393', 'A Metamorfose', 'Editora Companhia das Letras', '1915-01-01', 'Ficção', 120, 'Homem se transforma em inseto gigante.', 17),
+('9788501000409', 'O Processo', 'Editora Companhia das Letras', '1925-06-01', 'Ficção', 320, 'Homem preso sem motivo em processo surreal.', 17);
+
+
+INSERT INTO departamento (DepartamentoID, Nome, Responsavel, Descricao)
+VALUES 
+(0101, 'Editorial', 'Ana Martins', 'Responsável pela curadoria, edição e preparação de conteúdo para publicação.'),
+(0202, 'Produção', 'Carlos Silva', 'Cuida da diagramação, design gráfico e preparação dos materiais para impressão.'),
+(0303, 'Revisão', 'Juliana Rocha', 'Faz a correção ortográfica, gramatical e de estilo dos textos.'),
+(0404, 'Marketing e Comunicação', 'Fernanda Lima', 'Planeja e executa ações para divulgação dos livros e da imagem da editora.'),
+(0505, 'Comercial', 'Roberto Mendes', 'Gerencia vendas, contatos com livrarias e parceiros comerciais.'),
+(0606, 'Direitos Autorais e Contratos', 'Mariana Alves', 'Administra os contratos com autores e direitos de publicação.'),
+(0707, 'Financeiro', 'Daniel Costa', 'Controla receitas, despesas e processos contábeis da editora.'),
+(0808, 'Tecnologia da Informação', 'Lucas Pereira', 'Dá suporte técnico e cuida da infraestrutura de TI.'),
+(0909, 'Recursos Humanos', 'Patrícia Gomes', 'Administra recrutamento, treinamento e bem-estar dos colaboradores.'),
+(01010, 'Logística e Distribuição', 'Ricardo Nunes', 'Organiza o armazenamento e transporte dos livros.');
+
+
+INSERT INTO editora.areaconhecimento (AreaID, Descricao)
+VALUES (1, 'Literatura Brasileira'),
+(2, 'Literatura Portuguesa'),
+(3, 'Literatura Latino-Americana'),
+(4, 'Literatura Inglesa'),
+(5, 'Literatura Russa'),
+(6, 'Filosofia Existencialista'),
+(7, 'Fantasia'),
+(8, 'Literatura Infantil e Juvenil'),
+(9, 'Distopia e Ficção Política'),
+(10, 'Mistério e Romance Policial'),
+(11, 'Ficção Contemporânea'),
+(12, 'Romance Histórico');
+
+INSERT INTO Cliente (ClienteID, Nome, Email, Telefone, Endereco) 
+VALUES
+('1001', 'Ana Beatriz Silva', 'ana.silva@email.com', '(11) 98876-5432', 'Rua das Flores, 123 - São Paulo, SP'),
+('1002', 'Lucas Mendes Rocha', 'lucas.rocha@email.com', '(21) 98765-1234', 'Av. Brasil, 456 - Rio de Janeiro, RJ'),
+('1003', 'Mariana Costa Lima', 'mariana.lima@email.com', '(31) 98547-8965', 'Rua Minas Gerais, 789 - Belo Horizonte, MG'),
+('1004', 'Rafael Oliveira Santos', 'rafael.santos@email.com', '(51) 98234-6754', 'Rua do Comércio, 101 - Porto Alegre, RS'),
+('1005', 'Fernanda Souza Pinto', 'fernanda.pinto@email.com', '(41) 98456-1122', 'Av. Curitiba, 234 - Curitiba, PR'),
+('1006', 'Gustavo Almeida Freitas', 'gustavo.freitas@email.com', '(71) 98123-9988', 'Rua Bahia, 321 - Salvador, BA'),
+('1007', 'Juliana Martins Cruz', 'juliana.cruz@email.com', '(85) 98745-6622', 'Av. Fortaleza, 876 - Fortaleza, CE'),
+('1008', 'Pedro Henrique Dias', 'pedro.dias@email.com', '(95) 98899-4433', 'Rua Amazonas, 111 - Boa Vista, RR'),
+('1009', 'Camila Ribeiro Andrade', 'camila.ribeiro@email.com', '(62) 98433-2211', 'Av. Goiás, 654 - Goiânia, GO'),
+('1010', 'Thiago Moreira Leal', 'thiago.leal@email.com', '(98) 98321-7788', 'Rua Maranhão, 909 - São Luís, MA'),
+('1011', 'Bianca Farias Monteiro', 'bianca.monteiro@email.com', '(27) 98228-3344', 'Av. Vitória, 305 - Vitória, ES'),
+('1012', 'Eduardo Cardoso Lima', 'eduardo.cardoso@email.com', '(13) 98766-5500', 'Rua Santos, 212 - Santos, SP');
+
+INSERT INTO Funcionario (FuncionarioID, Nome, Cargo, Telefone, Endereco, DepartamentoID, QtdeLivrosVendidos) 
+VALUES
+(1, 'Ana Martins', 'Editora-Chefe', '1199999-0001', 'Rua das Letras, 101', 101, '1'),
+(2, 'Bruno Ferreira', 'Assistente Editorial', '1199999-0002', 'Rua das Letras, 102', 101,'5'),
+
+(3, 'Carlos Silva', 'Designer Gráfico', '1199999-0003', 'Rua da Impressão, 201', 202,'8'),
+(4, 'Daniela Soares', 'Coordenadora de Produção', '1199999-0004', 'Rua da Impressão, 202', 202,'15'),
+
+(5, 'Juliana Rocha', 'Revisora Sênior', '1199999-0005', 'Rua da Gramática, 301', 303,'11'),
+(6, 'Felipe Andrade', 'Revisor', '1199999-0006', 'Rua da Gramática, 302', 303,'12'),
+
+(7, 'Fernanda Lima', 'Gerente de Marketing', '1199999-0007', 'Av. da Comunicação, 401', 404,'9'),
+(8, 'Rafael Teixeira', 'Analista de Comunicação', '1199999-0008', 'Av. da Comunicação, 402', 404,'7'),
+
+(9, 'Roberto Mendes', 'Coordenador Comercial', '1199999-0009', 'Rua das Vendas, 501', 505,'12'),
+(10, 'Letícia Moura', 'Vendedora Técnica', '1199999-0010', 'Rua das Vendas, 502', 505,'20'),
+
+(11, 'Mariana Alves', 'Advogada de Direitos Autorais', '1199999-0011', 'Rua dos Contratos, 601', 606,'10'),
+(12, 'Thiago Ramos', 'Analista Jurídico', '1199999-0012', 'Rua dos Contratos, 602', 606,'12'),
+
+(13, 'Daniel Costa', 'Gerente Financeiro', '1199999-0013', 'Rua dos Números, 701', 707, '15'),
+(14, 'Vanessa Prado', 'Assistente Financeira', '1199999-0014', 'Rua dos Números, 702', 707,'16'),
+
+(15, 'Lucas Pereira', 'Analista de TI', '1199999-0015', 'Rua da Tecnologia, 801', 808,'13'),
+(16, 'Adriana Monteiro', 'Suporte Técnico', '1199999-0016', 'Rua da Tecnologia, 802', 808,'8'),
+
+(17, 'Patrícia Gomes', 'Coordenadora de RH', '1199999-0017', 'Rua do Trabalho, 901', 909,'9'),
+(18, 'Eduardo Lima', 'Analista de RH', '1199999-0018', 'Rua do Trabalho, 902', 909,'4'),
+
+(19, 'Ricardo Nunes', 'Coordenador de Logística', '1199999-0019', 'Rua da Entrega, 1001', 1010,'6'),
+(20, 'Camila Duarte', 'Assistente de Expedição', '1199999-0020', 'Rua da Entrega, 1002', 1010,'16');
+
+
+INSERT INTO Exemplar (SerieID, Estado, Localizacao, ISBN)
+VALUES
+('E001', 'Disponível', 'Estante A1 - Prateleira 2', '9788501000034'), -- A Hora da Estrela
+('E002', 'Emprestado', 'Estante B2 - Prateleira 1', '9788501000041'), -- Perto do Coração Selvagem
+('E003', 'Disponível', 'Estante C3 - Prateleira 4', '9788501000058'), -- Capitães da Areia
+('E004', 'Em Manutenção', 'Setor Técnico', '9788501000072'),          -- Ensaio sobre a Cegueira
+('E005', 'Disponível', 'Estante D4 - Prateleira 3', '9788501000096'), -- Cem Anos de Solidão
+('E006', 'Emprestado', 'Estante E1 - Prateleira 5', '9788501000133'), -- Hamlet
+('E007', 'Disponível', 'Estante F2 - Prateleira 2', '9788501000157'), -- O Grande Gatsby
+('E008', 'Reservado', 'Estante G3 - Prateleira 1', '9788501000171'),  -- Oliver Twist
+('E009', 'Disponível', 'Estante H1 - Prateleira 4', '9788501000195'), -- Orgulho e Preconceito
+('E010', 'Disponível', 'Estante I2 - Prateleira 3', '9788501000218'), -- 1984
+('E011', 'Emprestado', 'Estante J4 - Prateleira 2', '9788501000232'), -- Guerra e Paz
+('E012', 'Disponível', 'Estante K1 - Prateleira 5', '9788501000256'); -- Norwegian Wood
+
+
+INSERT INTO livroautor (ISBN, AutorID)
+VALUES 
+('9788501000034', 1),  -- A Hora da Estrela -> Clarice Lispector
+('9788501000041', 1),  -- Perto do Coração Selvagem -> Clarice Lispector
+('9788501000058', 3),  -- Capitães da Areia -> Jorge Amado
+('9788501000065', 3),  -- Gabriela, Cravo e Canela -> Jorge Amado
+('9788501000072', 4),  -- Ensaio sobre a Cegueira -> José Saramago
+('9788501000089', 4),  -- O Evangelho Segundo Jesus Cristo -> José Saramago
+('9788501000096', 5),  -- Cem Anos de Solidão -> Gabriel García Márquez
+('9788501000102', 5),  -- O Amor nos Tempos do Cólera -> Gabriel García Márquez
+('9788501000133', 7),  -- Hamlet -> William Shakespeare
+('9788501000140', 7),  -- Romeu e Julieta -> William Shakespeare
+('9788501000157', 8),  -- O Grande Gatsby -> F. Scott Fitzgerald
+('9788501000164', 8),  -- Os Belos e Malditos -> F. Scott Fitzgerald
+('9788501000171', 9);  -- Oliver Twist -> Charles Dickens('9788501000171', '008');
+
+
+INSERT INTO pedido (PedidoID, ClienteID, Data_Pedido, Status) 
+VALUES
+(1, 1001, '2025-04-01', 'Concluído'),
+(2, 1001, '2025-04-02', 'Pendente'),
+(3, 1001, '2025-04-03', 'Em andamento'),
+(4, 1005, '2025-04-04', 'Concluído'),
+(5, 1005, '2025-04-05', 'Cancelado'),
+(6, 1007, '2025-04-06', 'Pendente'),
+(7, 1006, '2025-04-07', 'Concluído'),
+(8, 1008, '2025-04-08', 'Em andamento'),
+(9, 1009, '2025-04-09', 'Concluído'),
+(10, 1010, '2025-04-10', 'Pendente'),
+(11, 1011, '2025-04-11', 'Cancelado'),
+(12, 1012, '2025-04-12', 'Concluído');
+
+
+INSERT INTO venda (VendaID, PedidoID, Data_Venda, Valor_Total) VALUES
+(1, 1, '2025-04-01', 129.90),
+(2, 2, '2025-04-02', 89.50),
+(3, 3, '2025-04-03', 145.00),
+(4, 4, '2025-04-04', 60.00),
+(5, 5, '2025-04-05', 0.00),      -- Pedido cancelado
+(6, 6, '2025-04-06', 105.75),
+(7, 7, '2025-04-07', 79.90),
+(8, 8, '2025-04-08', 92.30),
+(9, 9, '2025-04-09', 210.99),
+(10, 10, '2025-04-10', 55.00),
+(11, 11, '2025-04-11', 0.00),    -- Pedido cancelado
+(12, 12, '2025-04-12', 120.00);
