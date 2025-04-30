@@ -1,0 +1,98 @@
+-- 1. Listar todos os livros com seus respectivos autores
+SELECT l.Titulo, a.Nome AS autor
+FROM livro l
+JOIN autor a ON l.AutorID = a.AutorID;
+
+-- 2. Listar os títulos e o estado dos respectivos exemplares
+SELECT l.Titulo, e.Estado AS exemplar
+FROM livro l
+JOIN exemplar e ON l.ISBN = e.ISBN;
+
+-- 3. Listar os livros publicados em data igual ou inferior a 1943-01-01
+SELECT Titulo, Data_Publicacao
+FROM livro
+WHERE Data_Publicacao <= '1943-01-01';
+
+-- 4. Listar livros com número de páginas acima de 300
+SELECT Titulo, Num_Paginas
+FROM livro
+WHERE Num_Paginas > 300;
+
+-- 5. Listar os autores brasileiros
+SELECT * 
+FROM autor 
+WHERE Nacionalidade = 'Brasileiro';
+
+-- 6. Listar os autores brasileiros com a quantidade de livros
+SELECT a.Nome AS Autor, COUNT(l.ISBN) AS Numero_Livros
+FROM livro l
+JOIN autor a ON l.AutorID = a.AutorID
+GROUP BY a.Nome
+ORDER BY Numero_Livros DESC;
+
+-- 7. Selecionar livros e exemplares que estão disponíveis
+SELECT l.Titulo, e.Estado
+FROM livro l
+JOIN exemplar e ON l.ISBN = e.ISBN
+WHERE e.Estado = 'Disponível';
+
+-- 8. Retornar a quantidade de pedidos de um cliente
+SELECT p.PedidoID, p.Data_Pedido, p.Status
+FROM pedido p
+WHERE p.ClienteID = 1001;
+
+-- 9. Listar os pedidos entre duas datas específicas
+SELECT p.PedidoID, p.ClienteID, p.Data_Pedido
+FROM pedido p
+WHERE p.Data_Pedido BETWEEN '2025-01-01' AND '2025-04-05';
+
+-- 10. Listar os pedidos com status pendente
+SELECT p.PedidoID, p.ClienteID, p.Data_Pedido
+FROM pedido p
+WHERE p.Status = 'Pendente';
+
+-- 11 Listar todos os clientes com seus dados de contato (nome, email, telefone e endereço) e ordene por nome
+SELECT ClienteID, Nome, Email, Telefone, Endereco
+FROM cliente
+ORDER BY Nome;
+
+-- 12 Listar apenas os livros do AutorID
+SELECT l.Titulo, l.Data_Publicacao, l.Genero, a.Nome
+FROM livro l
+JOIN autor a ON l.AutorID = a.AutorID
+WHERE l.AutorID = 5;
+
+-- 13 Listar os 5 livros mais antigos do acervo
+SELECT l.Titulo, l.Data_Publicacao, a.Nome
+FROM livro l
+JOIN autor a ON l.AutorID = a.AutorID
+ORDER BY Data_Publicacao ASC
+LIMIT 5;
+
+-- 14 Listar o número de pedidos por status
+SELECT Status, COUNT(*) AS Total_Pedidos
+FROM pedido
+GROUP BY Status;
+
+-- 15 Listar os livros agrupados por gênero e a quantidade de livros em cada gênero
+SELECT Genero, COUNT(*) AS Total_Livros
+FROM livro
+GROUP BY Genero;
+
+-- 16 Calcular a média de páginas dos livros por autor
+SELECT a.Nome, AVG(l.Num_Paginas) AS Media_Paginas
+FROM livro l
+JOIN autor a ON l.AutorID = a.AutorID
+GROUP BY a.Nome;
+
+-- 17 Liste os clientes com mais de dois pedidos feitos
+SELECT c.ClienteID, c.Nome, COUNT(p.PedidoID) AS Total_Pedidos
+FROM cliente c
+JOIN pedido p ON c.ClienteID = p.ClienteID
+GROUP BY c.ClienteID
+HAVING COUNT(p.PedidoID) > 2;
+
+-- 18 Listar o total de autores por nacionalidade
+SELECT a.Nacionalidade, COUNT(*) AS Total_Autores
+FROM autor a
+GROUP BY a.Nacionalidade;
