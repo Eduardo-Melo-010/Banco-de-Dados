@@ -1,0 +1,91 @@
+DELIMITER $$
+-- 1
+Create function fn_total_livros_autor(p_AutorID INT)
+returns int deterministic
+begin
+	declare v_total int;
+    select count(*) into v_total from livro where AutorID = p_AutorID;
+    return v_total;
+end $$
+
+-- 2
+Create Function fn_exemplar_disponiveis (p_ISBN varchar (20))
+returns int deterministic
+begin
+	declare v_qtde int;
+    select count(*) into v_qtde
+    from exemplar
+    where ISBN = p_ISBN and Estado = 'Disponível';
+    return v_qtde;
+end $$
+
+-- 3
+Create Function fn_autor_mais_produtivo() 
+returns varchar (100) deterministic
+begin
+    declare v_nome varchar (100);
+    select a.Nome into v_nome
+    from autor a
+    join livro l on a.AutorID = l.AutorID
+    group by a.AutorID
+    order by COUNT(l.ISBN) desc
+    limit 1;
+    return v_nome;
+end $$
+
+-- 4
+Create function fn_percentual_pedidos_concluidos() 
+returns decimal (5,2) deterministic
+begin
+    declare v_percentual decimal (5,2);
+    select round (100.0 * SUM(case when Status = 'Concluído' then 1 else 0 end) / count(*), 2)
+    into v_percentual
+    from pedido;
+    return v_percentual;
+end $$
+
+-- 5
+Create Function fn_media_paginas_genero(p_genero varchar (100)) 
+returns decimal	(5,2) deterministic
+begin
+    declare v_media decimal (5,2);
+    select avg (Num_Paginas) into v_media
+    from livro
+    where Genero = p_genero;
+    return v_media;
+end $$
+
+-- 6
+Create Function fn_cliente_mais_pedidos() 
+returns varchar (100) deterministic
+begin
+    declare v_nome varchar (100);
+    select c.Nome into v_nome
+    from cliente c
+    inner join pedido p on c.ClienteID = p.ClienteID
+    group by c.ClienteID
+    order by count(p.PedidoID) desc
+    limit 1;
+    return v_nome;
+end $$
+
+DELIMITER ;
+
+
+-- 1 
+select fn_total_livros_autor (9) as TotalLivrosAutor;
+
+-- 2
+select fn_exemplar_disponiveis (9788501000041) as QtdeLivrosDisponiveis;
+
+-- 3 
+select fn_autor_mais_produtivo() as AutorMaisProdutivo;
+
+-- 4
+select fn_percentual_pedidos_concluidos() AS PercentualPedidosConcluidos;
+
+-- 5
+select fn_media_paginas_genero('Tragédia') AS MediaPaginasRomance;
+
+-- 6
+select fn_cliente_mais_pedidos() AS ClienteMaisPedidos;
