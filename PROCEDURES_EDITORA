@@ -1,0 +1,167 @@
+DELIMITER $$
+
+-- Procedure 1: Registrar venda, atualizar estoque e inserir pedido
+CREATE PROCEDURE sp_registrar_venda(
+    IN p_ClienteID INT,
+    IN p_ISBN VARCHAR(20),
+    IN p_Quantidade INT,
+    OUT p_VendaID INT
+)
+BEGIN
+    DECLARE v_Preco DECIMAL(10,2);
+    DECLARE v_EstoqueAtual INT;
+    DECLARE v_PedidoID INT;
+
+    -- 1. Buscar preço do livro (simulado aqui como valor fixo)
+    SET v_Preco = 50.00;
+
+    -- 2. Verificar se exemplar está disponível
+    SELECT COUNT(*) INTO v_EstoqueAtual 
+    FROM exemplar e WHERE e.ISBN = p_ISBN AND e.Estado = 'Disponível';
+
+    IF v_EstoqueAtual < p_Quantidade THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Exemplares insuficientes disponíveis';
+    ELSE
+        -- 3. Inserir pedido
+        INSERT INTO pedido (ClienteID, Data_Pedido, Status)
+        VALUES (p_ClienteID, CURDATE(), 'Pendente');
+        SET v_PedidoID = LAST_INSERT_ID();
+
+        -- 4. Inserir venda
+        INSERT INTO venda (PedidoID, Data_Venda, Valor_Total)
+        VALUES (v_PedidoID, CURDATE(), p_Quantidade * v_Preco);
+        SET p_VendaID = LAST_INSERT_ID();
+
+        -- 5. Atualizar exemplares para "Emprestado"
+        UPDATE exemplar 
+        SET Estado = 'Emprestado' 
+        WHERE ISBN = p_ISBN AND Estado = 'Disponível' 
+        LIMIT p_Quantidade;
+    END IF;
+END$$
+
+
+-- Procedure 2: Listar livros e autores de um gênero específico
+CREATE PROCEDURE sp_listar_livros_genero(IN p_genero VARCHAR(100))
+BEGIN
+    SELECT l.Titulo, a.Nome AS Autor, l.Data_Publicacao
+    FROM livro l
+    JOIN autor a ON l.AutorID = a.AutorID
+    WHERE l.Genero = p_genero
+    ORDER BY l.Data_Publicacao DESC;
+END$$
+
+
+-- Procedure 3: Atualizar status de pedidos antigos para 'Concluído'
+CREATE PROCEDURE sp_atualizar_status_pedidos(IN p_data_limite DATE)
+BEGIN
+    -- 1. Atualiza pedidos com chave primária
+    UPDATE pedido 
+    SET Status = 'Concluído'
+    WHERE PedidoID IN (
+        SELECT PedidoID FROM (
+            SELECT PedidoID FROM pedido 
+            WHERE Data_Pedido <= p_data_limite AND Status <> 'Concluído'
+        ) AS sub
+    );
+
+    -- 2. Seleciona pedidos atualizados
+    SELECT * FROM pedido WHERE Data_Pedido <= p_data_limite;
+
+    -- 3. Contagem de pedidos com status concluído
+    SELECT COUNT(*) AS Total_Concluidos FROM pedido WHERE Status = 'Concluído';
+
+    -- 4. Listar clientes com pedidos concluídos
+    SELECT DISTINCT c.ClienteID, c.Nome 
+    FROM cliente c
+    JOIN pedido p ON c.ClienteID = p.ClienteID
+    WHERE p.Status = 'Concluído';
+END $$
+
+-- Procedure 4: Consultar vendas por cliente e período
+CREATE PROCEDURE sp_consultar_vendas_periodo(
+    IN p_clienteID INT,
+    IN p_data_ini DATE,
+    IN p_data_fim DATE
+)
+BEGIN
+    SELECT v.VendaID, v.Data_Venda, v.Valor_Total, p.Status
+    FROM venda v
+    JOIN pedido p ON v.PedidoID = p.PedidoID
+    WHERE p.ClienteID = p_clienteID
+      AND v.Data_Venda BETWEEN p_data_ini AND p_data_fim
+    ORDER BY v.Data_Venda;
+END$$
+
+
+-- Procedure 5: Contar livros por autor e atualizar quantidade de livros vendidos do funcionário responsável
+CREATE PROCEDURE sp_contar_livros_e_atualizar_vendas(
+    IN p_funcionarioID INT,
+    IN p_autorID INT
+)
+BEGIN
+    DECLARE v_qtde INT;
+
+    -- 1. Contar livros do autor
+    SELECT COUNT(*) INTO v_qtde FROM livro WHERE AutorID = p_autorID;
+
+    -- 2. Atualizar qtde livros vendidos do funcionário
+    UPDATE funcionario 
+    SET QtdeLivrosVendidos = QtdeLivrosVendidos + v_qtde
+    WHERE FuncionarioID = p_funcionarioID;
+
+    -- 3. Retornar quantidade de livros
+    SELECT v_qtde AS LivrosDoAutor;
+
+    -- 4. Retornar dados do funcionário atualizado
+    SELECT Nome, QtdeLivrosVendidos FROM funcionario WHERE FuncionarioID = p_funcionarioID;
+END$$
+
+
+-- Procedure 6: Inserir novo cliente e listar seus pedidos
+CREATE PROCEDURE sp_inserir_cliente_e_listar_pedidos(
+    IN p_Nome VARCHAR(100),
+    IN p_Email VARCHAR(100),
+    IN p_Telefone VARCHAR(30),
+    IN p_Endereco VARCHAR(200)
+)
+BEGIN
+    DECLARE v_clienteID INT;
+
+    -- 1. Inserir cliente
+    INSERT INTO cliente (Nome, Email, Telefone, Endereco)
+    VALUES (p_Nome, p_Email, p_Telefone, p_Endereco);
+
+    SET v_clienteID = LAST_INSERT_ID();
+
+    -- 2. Listar cliente inserido
+    SELECT * FROM cliente WHERE ClienteID = v_clienteID;
+
+    -- 3. Listar pedidos do cliente (deve ser vazio)
+    SELECT * FROM pedido WHERE ClienteID = v_clienteID;
+
+    -- 4. Retornar mensagem de sucesso
+    SELECT CONCAT('Cliente ', p_Nome, ' inserido com sucesso!') AS Mensagem;
+END$$
+
+DELIMITER ;
+
+-- 1
+CALL sp_registrar_venda(1006, '9788501000096', 1, @vendaID);
+SELECT @vendaID;
+
+-- 2: Listar livros do gênero Romance
+CALL sp_listar_livros_genero('Romance');
+
+-- 3: Atualizar status de pedidos até 2025-04-05
+CALL sp_atualizar_status_pedidos('2025-04-05');
+
+-- 4: Consultar vendas do cliente 1001 entre 2025-04-01 e 2025-04-10
+CALL sp_consultar_vendas_periodo(1001, '2025-04-01', '2025-04-10');
+
+-- 5: Contar livros do autor 1 e atualizar funcionário 10
+CALL sp_contar_livros_e_atualizar_vendas(10, 1);
+
+-- 6: Inserir cliente e listar pedidos
+CALL sp_inserir_cliente_e_listar_pedidos('Eduardo José', 'eduardo.melo@gmail.com', '(81) 98836-1111', 'Rua do Hospício, 123');
+
